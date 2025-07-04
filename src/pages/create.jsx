@@ -7,7 +7,7 @@ const Create = () => {
 }
 
   return (
-    <div className="max-w-xl mx-auto bg-white shadow-md rounded-xl p-6 space-y-4">
+    <div className="max-w-xl mx-auto bg-white shadow-md pt-30 rounded-xl p-6 space-y-4">
       <h2 className="text-2xl font-bold text-indigo-700 mb-4">Create New Post</h2>
 
       <div className="space-y-2">
