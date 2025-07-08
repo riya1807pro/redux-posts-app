@@ -1,59 +1,27 @@
 import { useSelector } from "react-redux";
 import PostCard from "@/component/postCard";
-import { motion } from "framer-motion";
 
 const Home = () => {
   const posts = useSelector(state => state.Slice.posts);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 80, damping: 12 }}
-      className="flex flex-col items-center p-4 min-h-screen w-full bg-gray-50 dark:bg-zinc-900 pt-20"
-    >
-      <motion.h1
-        className="text-4xl font-bold text-indigo-900 dark:text-indigo-400 mb-6 text-center"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        Manage your content like a pro 🚀
-      </motion.h1>
-
-      <motion.div
-        className="flex flex-wrap justify-center gap-6 w-full max-w-6xl"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.1 } }
-        }}
-      >
-        {posts && posts.length > 0 ? (
-          posts.map(post => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 100 }}
-              whileHover={{ scale: 1.05, rotate: 1 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <PostCard post={post} />
-            </motion.div>
-          ))
-        ) : (
-          <motion.p
-            className="text-gray-600 dark:text-gray-300"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            No posts found.
-          </motion.p>
-        )}
-      </motion.div>
-    </motion.div>
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white overflow-hidden pt-20">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 animate-gradient-x opacity-30 blur-3xl"></div>
+      <div className="relative z-10 w-full max-w-4xl mx-auto p-8 rounded-2xl shadow-2xl bg-black/60 backdrop-blur-md mt-10">
+        <h1 className="text-4xl font-bold mb-4 text-center text-white drop-shadow-lg">Your Posts</h1>
+        <p className="mb-6 text-lg text-center text-gray-200">Create, edit, favorite, and manage your content in a beautiful, interactive interface.</p>
+        <div className="flex flex-wrap justify-center gap-6 w-full">
+          {posts && posts.length > 0 ? (
+            posts.map(post => (
+              <PostCard key={post.id} post={post} />
+            ))
+          ) : (
+            <p className="text-gray-200 text-center w-full">No posts found.</p>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

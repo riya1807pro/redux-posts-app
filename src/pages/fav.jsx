@@ -1,56 +1,27 @@
-import React from "react";
-import PostCard from "@/component/postCard";
+// Example for fav.jsx
+// filepath: c:\Users\HP\Downloads\riya\redux-crud-app\src\pages\fav.jsx
 import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
+import PostCard from "@/component/postCard";
 
 const Fav = () => {
   const favPosts = useSelector((state) => state.Slice.posts.filter(post => post.fav));
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 80 }}
-      className="flex flex-col items-center p-4 min-h-screen w-full bg-gray-50 dark:bg-zinc-900 pt-20"
-    >
-      <motion.h1
-        className="text-4xl font-bold text-indigo-900 dark:text-indigo-400 mb-6 text-center"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        Your favorite posts 💫
-      </motion.h1>
-
-      <motion.div
-        className="flex flex-wrap justify-center gap-6 w-full max-w-6xl"
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.1 } }
-        }}
-      >
-        {favPosts.length === 0 ? (
-          <motion.p className="text-gray-600 dark:text-gray-300" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            No favorite posts yet.
-          </motion.p>
-        ) : (
-          favPosts.map(post => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 100 }}
-              whileHover={{ scale: 1.05, rotate: -1 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <PostCard post={post} />
-            </motion.div>
-          ))
-        )}
-      </motion.div>
-    </motion.div>
+    <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-purple-900 via-pink-900 to-red-900 text-white overflow-hidden pt-20">
+      <div className="relative z-10 w-full max-w-6xl mx-auto p-8 rounded-2xl shadow-2xl bg-black/60 backdrop-blur-md mt-10">
+        <h1 className="text-4xl font-bold mb-4 text-center text-yellow-300 drop-shadow-lg">Your Favorite Posts</h1>
+        <p className="mb-6 text-lg text-center text-gray-200">All your starred content in one place.</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+          {favPosts.length === 0 ? (
+            <div className="text-gray-200 text-center w-full">No fav posts yet.</div>
+          ) : (
+            favPosts.map((post) => (
+              <PostCard key={post.id} post={post} />
+            ))
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 

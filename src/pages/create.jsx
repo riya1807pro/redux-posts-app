@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
 import { add } from "../reduxConcepts/slice";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -10,6 +10,7 @@ const Create = () => {
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   function handleImageChange(e) {
     const file = e.target.files[0];
@@ -38,88 +39,60 @@ const Create = () => {
       setDescription("");
       setImage("");
       setPreview("");
+      navigate("/")
     }
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ type: "spring", stiffness: 120, damping: 15 }}
-      className="max-w-xl mx-auto bg-white dark:bg-zinc-800 shadow-lg rounded-xl p-6 space-y-4 mt-8"
-    >
-      <motion.h2
-        className="text-3xl font-bold text-indigo-600 dark:text-indigo-400 text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-      >
-        Create New Post
-      </motion.h2>
-
-      <motion.div
-        className="space-y-2"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Title</label>
-        <input
-          type="text"
-          placeholder="Enter Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="w-full border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-700 dark:text-white"
-        />
-      </motion.div>
-
-      <motion.div
-        className="space-y-2"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Description</label>
-        <textarea
-          placeholder="Enter description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 h-28 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:bg-zinc-700 dark:text-white"
-        />
-      </motion.div>
-
-      <motion.div
-        className="space-y-2"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
-        <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Upload Image</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="w-full border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2 cursor-pointer dark:bg-zinc-700 dark:text-white"
-        />
-        {preview && (
-          <motion.img
-            src={preview}
-            alt="Preview"
-            className="mt-2 rounded-lg w-full h-48 object-cover shadow-md"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            whileHover={{ scale: 1.05 }}
-          />
-        )}
-      </motion.div>
-
-      <motion.div
-        className="pt-4"
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <Button onClick={onSubmit} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white">
-          Save
-        </Button>
-      </motion.div>
-    </motion.div>
+    <div className="relative min-h-screen flex items-center justify-center bg-gray-900 text-white overflow-hidden">
+      {/* Animated Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 animate-gradient-x opacity-30 blur-3xl"></div>
+      <div className="relative z-10 w-full max-w-xl p-8 rounded-2xl shadow-2xl bg-black/60 backdrop-blur-md mt-10">
+        <h2 className="text-3xl font-bold mb-4 text-center text-white drop-shadow-lg">Create New Post</h2>
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-slate-200">Title</label>
+            <input
+              type="text"
+              placeholder="Enter Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full border border-slate-500 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-zinc-800 text-white placeholder:text-gray-400"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-slate-200">Description</label>
+            <textarea
+              placeholder="Enter description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full border border-slate-500 rounded-lg px-3 py-2 h-28 focus:outline-none focus:ring-2 focus:ring-pink-400 bg-zinc-800 text-white placeholder:text-gray-400"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-slate-200">Upload Image</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full border border-slate-500 rounded-lg px-3 py-2 cursor-pointer bg-zinc-800 text-white"
+            />
+            {preview && (
+              <img
+                src={preview}
+                alt="Preview"
+                className="mt-2 rounded-lg w-full h-48 object-cover shadow-md"
+              />
+            )}
+          </div>
+          <div className="pt-4">
+            <Button onClick={onSubmit} className="w-full bg-gradient-to-r from-pink-500 to-purple-500 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-all duration-200">
+              Save
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
