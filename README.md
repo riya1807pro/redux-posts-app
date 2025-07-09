@@ -38,9 +38,6 @@ Easily deploy on Vercel, Netlify, or Surge for lightning fast global delivery.
 ✍️ Author
 Riya Kaushik
 
-[github](https://github.com/riya1807pro)
-
-[Linkedin](https://www.linkedin.com/in/riyakaushik-webdev)
 
 
 
