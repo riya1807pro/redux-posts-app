@@ -1,6 +1,23 @@
-import React from 'react';
+import { Loader } from '@/component/loading';
+import React, { useEffect, useState } from 'react';
 
 export default function About() {
+   const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 500);
+      return () => clearTimeout(timer);
+    }, []);
+  
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center min-h-screen bg-gray-900">
+          <div className="w-full max-w-sm p-10 rounded-lg animate-pulse h-80">
+            <Loader />
+          </div>
+        </div>
+      );
+    }
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gray-900 text-white overflow-hidden">
       {/* Animated Gradient Background */}

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { edit } from "../reduxConcepts/slice";
 import { Button } from "@/components/ui/button";
+import { Loader } from "@/component/loading";
 
 const EditPage = () => {
   const { id } = useParams();
@@ -25,6 +26,23 @@ const EditPage = () => {
       reader.readAsDataURL(file);
     }
   }
+
+   const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 500);
+        return () => clearTimeout(timer);
+      }, []);
+    
+      if (loading) {
+        return (
+          <div className="flex items-center justify-center min-h-screen bg-gray-900">
+            <div className="w-full max-w-sm p-10 rounded-lg animate-pulse h-80">
+              <Loader />
+            </div>
+          </div>
+        );
+      }
 
   function onSubmit() {
     if (title.trim() === "" || description.trim() === "") {

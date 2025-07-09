@@ -1,37 +1,36 @@
-import { 
-  AlertDialog, 
-  AlertDialogTrigger, 
-  AlertDialogContent, 
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogDescription, 
+  AlertDialogDescription,
   AlertDialogFooter,
-  AlertDialogCancel, 
-  AlertDialogAction 
-} from "@/components/ui/alert-dialog"
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
-export default function ConfirmDelete() {
+export default function ConfirmDelete({ onConfirm, children }) {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900">
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <Button variant="outline">Delete Post</Button>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Confirm Action</AlertDialogTitle>
-            <AlertDialogDescription>
-              Are you sure you want to delete the post? This cannot be undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Confirm</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        {children}
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Confirm Action</AlertDialogTitle>
+          <AlertDialogDescription>
+            Are you sure you want to delete this post? This action cannot be undone.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm}>Confirm</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
+  

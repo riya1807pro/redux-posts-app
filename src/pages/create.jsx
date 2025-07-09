@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
 import { add } from "../reduxConcepts/slice";
 import { useNavigate } from "react-router-dom";
+import { Loader } from "@/component/loading";
 
 const Create = () => {
   const [title, setTitle] = useState("");
@@ -23,6 +24,23 @@ const Create = () => {
       reader.readAsDataURL(file);
     }
   }
+
+   const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 500);
+      return () => clearTimeout(timer);
+    }, []);
+  
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center min-h-screen bg-gray-900">
+          <div className="w-full max-w-sm p-10 rounded-lg animate-pulse h-80">
+            <Loader />
+          </div>
+        </div>
+      );
+    }
 
   function onSubmit() {
     if (title.trim() === "" || description.trim() === "") {

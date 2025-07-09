@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Link } from "react-router-dom";
 
 const initialState = {
   posts: []
@@ -32,6 +31,7 @@ const slice = createSlice({
       if (index !== -1) {
         state.posts[index].fav = !state.posts[index].fav;
       }
+      
     },
   }
 });

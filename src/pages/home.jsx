@@ -1,8 +1,27 @@
 import { useSelector } from "react-redux";
 import PostCard from "@/component/postCard";
+import { useEffect, useState } from "react";
+import { Loader } from "@/component/loading";
 
 const Home = () => {
   const posts = useSelector(state => state.Slice.posts);
+
+   const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 500);
+        return () => clearTimeout(timer);
+      }, []);
+    
+      if (loading) {
+        return (
+          <div className="flex items-center justify-center min-h-screen bg-gray-900">
+            <div className="w-full max-w-sm p-10 rounded-lg animate-pulse h-80">
+              <Loader />
+            </div>
+          </div>
+        );
+      }
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white overflow-hidden pt-20">
