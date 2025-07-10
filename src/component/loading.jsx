@@ -1,4 +1,3 @@
-// import { BookLoader } from "react-awesome-loaders";
 import { Commet } from "react-loading-indicators";
 export const Loader = () => {
   return (

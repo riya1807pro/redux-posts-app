@@ -23,7 +23,7 @@ const Navbar = () => {
   return (
     <nav className="w-full bg-gradient-to-r from-purple-800 via-rose-500 to-rose-600 shadow-lg transition-colors duration-300 fixed z-20 backdrop-blur-md bg-opacity-90">
       <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-        <h2 className="font-extrabold text-white text-2xl tracking-tight font-stretch-expanded drop-shadow-lg  ">
+        <h2 className="font-extrabold text-white text-2xl tracking-tight font-stretch-expanded drop-shadow-lg flex justify-between items-center">
           <span className="bg-black/20 px-3 py-1 rounded-xl">Crud-App</span>
         </h2>
         <div className="hidden md:flex gap-6 items-center">
